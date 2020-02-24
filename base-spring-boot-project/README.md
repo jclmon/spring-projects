@@ -1,4 +1,4 @@
-# microservices-sample-project
+# base-spring-boot-project
 
 ### Prerequisities
   * JDK 1.8.X
