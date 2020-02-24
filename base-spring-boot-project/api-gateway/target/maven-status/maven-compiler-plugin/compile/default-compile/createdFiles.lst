@@ -1,0 +1,4 @@
+com\jcom\apigateway\LogFilter.class
+com\jcom\apigateway\ApiRestController.class
+com\jcom\apigateway\CustomCorsFilter.class
+com\jcom\apigateway\App.class

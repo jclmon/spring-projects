@@ -1,0 +1,55 @@
+# Spring properties
+spring:
+  application:
+    name: auth-service
+
+# Mongo properties
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: auth-service-db
+  # spring boot admin client
+  boot:
+    admin:      
+      client:
+        url: http://localhost:8080/admin
+        
+# Expose all the Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:        
+        include: "*"        
+
+# HTTP Server
+server:
+  port: 81
+  
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+
+# Auth JWT
+jwt:
+  header: Authorization
+  secret: secret_secret
+  expiration: 172800 #seconds
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+
+# Image Upload Location
+image:
+  upload:
+    location: C:/images
+    
+# Email
+email:
+  userName: test@gmail.com
+  password: test

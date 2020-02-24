@@ -1,0 +1,82 @@
+# Spring properties
+spring:
+  application:
+    name: api-gateway  # Identify this application
+    version: 0.0.1-SNAPSHOT
+    
+  # Spring boot admin 
+  boot:
+   admin:
+     # other path distinct for eureka
+     context-path: /admin
+     
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+    
+# Expose all the Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:        
+        include: "*"
+      path-mapping:
+        health: /api/health
+        metrics: /api/metrics        
+
+# Server
+server:
+  port: 8080   # HTTP (Tomcat) port
+
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+
+ribbon:
+  ConnectTimeout: 120000
+  ReadTimeout: 120000
+  MaxTotalHttpConnections: 100
+  MaxConnectionsPerHost: 100
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 2
+  ServerListRefreshInterval: 2000
+  OkToRetryOnAllOperations: true
+  retryableStatusCodes: 500,404
+  
+# Api-Gate-Way
+zuul:
+  prefix: /api
+  routes:
+    auth-service:
+      path: /auth-service/**
+      serviceId: AUTH-SERVICE
+      sensitiveHeaders: Cookie,Set-Cookie
+      
+    product-service:
+      path: /product-service/**
+      serviceId: PRODUCT-SERVICE
+      sensitiveHeaders: Cookie,Set-Cookie
+
+#logueo      
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG   
+      
+# Increase the Hystrix timeout to 60s (globally)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+      

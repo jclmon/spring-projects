@@ -1,0 +1,12 @@
+com\jcom\product\api\service\ProductService.class
+com\jcom\product\api\config\AppConfiguration.class
+com\jcom\product\api\config\AppConfiguration$1.class
+com\jcom\product\api\model\Product.class
+com\jcom\product\api\dao\impl\ProductDaoImpl.class
+com\jcom\product\api\config\Swagger2Config.class
+com\jcom\product\api\controller\ProductController.class
+com\jcom\product\api\dao\ProductDao.class
+com\jcom\product\api\App.class
+com\jcom\product\api\security\config\WebSecurityConfig.class
+com\jcom\product\api\config\AppConfiguration$2.class
+com\jcom\product\api\service\impl\ProductServiceImpl.class
