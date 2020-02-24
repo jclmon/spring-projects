@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "4c8808ec-d9ad-4545-b335-4af9b151a33f",
+		"name": "workspace_microservicios_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "solicitar token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/api/auth-service/auth?username=testuser5&password=test",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth-service",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "testuser5"
+						},
+						{
+							"key": "password",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inicializar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/api/auth-service/roles-permissions-setup/init",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth-service",
+						"roles-permissions-setup",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjVAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1Mzg2NjE5OTg0MDgsImV4cCI6MTUzODgzNDc5OH0.in_H7w2GLVByiB5xBzLSZF7Dd4cWhajxISQdgAi5dKeczrURzmZVynoK2d0fFxH5PlVp7w1wNrd4xfPqW3hyKQ"
+					},
+					{
+						"key": "",
+						"value": ""
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products byId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjVAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1Mzg2NjE5OTg0MDgsImV4cCI6MTUzODgzNDc5OH0.in_H7w2GLVByiB5xBzLSZF7Dd4cWhajxISQdgAi5dKeczrURzmZVynoK2d0fFxH5PlVp7w1wNrd4xfPqW3hyKQ"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products/5bb61d328b6f2ececff28035",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products",
+						"5bb61d328b6f2ececff28035"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjVAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1Mzg2NjE5OTg0MDgsImV4cCI6MTUzODgzNDc5OH0.in_H7w2GLVByiB5xBzLSZF7Dd4cWhajxISQdgAi5dKeczrURzmZVynoK2d0fFxH5PlVp7w1wNrd4xfPqW3hyKQ"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\" : \"5\", \"sellerId\" : \"testuser1\", \"name\": \"Huami Amazfit\", \"price\" : 80.59 }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
