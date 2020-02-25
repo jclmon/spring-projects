@@ -53,7 +53,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 			userDetails = new JwtUser(
 					user
 					, getAuthorities(user)
-					, (user.getStatus() == 1)?true:false);
+					, (user.getStatus() == 1) ? true : false);
 			
 			if (userDetails.getAuthorities().isEmpty()) {
 				logger.debug("User - {}, Permission count - 0", username);

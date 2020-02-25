@@ -3,33 +3,27 @@ package com.jcom.auth.api.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import pl.jcom.common.model.EntityBase;
 import pl.jcom.common.model.Permission;
 import pl.jcom.common.model.image.ImageContainer;
 
 @Document(collection="User")
-@ApiModel(description = "User data")
 public class User extends EntityBase{
 
-	@ApiModelProperty(notes = "mail")
     private String email;
     
-	@ApiModelProperty(notes = "user")
 	private String username;
 
-	@ApiModelProperty(notes = "pass")
     private String password;
     
-	@ApiModelProperty(notes = "firstname")
     private String firstName;
 
-	@ApiModelProperty(notes = "lastname")
     private String lastName;
     
     private ImageContainer profileImageContainer = new ImageContainer();

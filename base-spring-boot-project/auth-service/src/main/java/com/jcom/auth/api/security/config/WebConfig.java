@@ -28,7 +28,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
@@ -38,7 +37,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "org.springframework.showcases.lite")
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements WebMvcConfigurer {
 
 	@Bean
 	public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {

@@ -2,6 +2,8 @@ package com.jcom.product.api.config;
 
 import java.util.Map;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.cache.CacheManager;
@@ -15,16 +17,15 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import pl.jcom.common.async.AsyncConfig;
 import pl.jcom.common.cache.CacheConfig;
 import pl.jcom.common.dao.DaoConfig;
 import pl.jcom.common.security.SecurityConfig;
-import pl.jcom.common.sse.SseConfig;
 
 @Configuration
-@Import({AsyncConfig.class, SseConfig.class, DaoConfig.class, SecurityConfig.class, CacheConfig.class})
+@EnableAutoConfiguration(exclude=RabbitAutoConfiguration.class)
+@Import({AsyncConfig.class, DaoConfig.class, SecurityConfig.class, CacheConfig.class})
 public class AppConfiguration {
 
 	@Bean
@@ -52,7 +53,7 @@ public class AppConfiguration {
 	 */
 	@Bean
     public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
+        return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
             	registry.addMapping("/**")

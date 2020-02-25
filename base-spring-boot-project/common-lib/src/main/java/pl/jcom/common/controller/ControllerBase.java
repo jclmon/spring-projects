@@ -1,39 +1,15 @@
 package pl.jcom.common.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import pl.jcom.common.async.response.AsyncResponseEntity;
-import pl.jcom.common.exception.ListenerTypeNotFound;
-import pl.jcom.common.sse.ListenerType;
-import pl.jcom.common.sse.SseEmitterApplicationEventListener;
-import pl.jcom.common.sse.SubmissionEvent;
 import rx.Observable;
 import rx.Single;
 
 public class ControllerBase {
 	
-	@Autowired
-	private SseEmitterApplicationEventListener applicationEventListener;
-	
-	@Autowired
-    private ApplicationEventPublisher eventPublisher;
-	
-	private ListenerType listenerType;
-	
-	public ControllerBase() {
-	}
-	
-	public ControllerBase(ListenerType listenerType){
-		this.listenerType = listenerType;
-	}
-
 	protected <T> ResponseEntity<T> makeResponse(T message) {
 		return makeResponse(message, null, HttpStatus.OK);
 	}
@@ -80,35 +56,6 @@ public class ControllerBase {
 	}
 	/*
 	 * Single
-	 */
-	
-	/*
-	 * Server-Sent-Event
-	 */
-	@RequestMapping("/listener/{id}")
-	public SseEmitter  listen(@PathVariable("id") String id){
-		
-		if(this.listenerType == null)
-			throw new ListenerTypeNotFound();
-		
-		final SseEmitter sseEmitter = new SseEmitter();
-		applicationEventListener.addSseEmitters(this.listenerType , id, sseEmitter);
-		return sseEmitter;
-		
-	}
-	
-	public void  publishMessage(String id, Object message){
-		
-		if(this.listenerType == null)
-			throw new ListenerTypeNotFound();
-		
-		SubmissionEvent submissionEvent = new SubmissionEvent(this.listenerType, id, message);
-		eventPublisher.publishEvent(submissionEvent);
-		
-	}
-	
-	/*
-	 * Server-Sent-Event
 	 */
 
 }

@@ -20,13 +20,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class EventBusConfig {
 
-	@Value("${xg.rabbitmq.queue:XGQueueCommon}")
+	@Value("${app.rabbitmq.queue:XGQueueCommon}")
 	String queeName;
 
-	@Value("${xg.rabbitmq.topic:spring-boot-exchange}")
+	@Value("${app.rabbitmq.topic:spring-boot-exchange}")
 	String exchangeTopic;
 
-	@Value("${xg.rabbitmq.expiration:5000}")
+	@Value("${app.rabbitmq.expiration:5000}")
 	String expiration;
 
 	@Value("${spring.rabbitmq.host:localhost}")

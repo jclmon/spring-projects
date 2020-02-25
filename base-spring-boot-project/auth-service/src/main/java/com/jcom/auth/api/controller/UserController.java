@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jcom.auth.api.dto.PasswordDto;
 import com.jcom.auth.api.dto.UserImageDto;
+import com.jcom.auth.api.event.UserEvent;
 import com.jcom.auth.api.model.User;
 import com.jcom.auth.api.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
 import pl.jcom.common.async.response.AsyncResponseEntity;
 import pl.jcom.common.controller.ControllerBase;
+import pl.jcom.common.event.EventBus;
 import pl.jcom.common.response.CommonResponse;
-import pl.jcom.common.sse.ListenerType;
 
 @RestController
 @RequestMapping("/users")
@@ -27,9 +28,8 @@ public class UserController extends ControllerBase {
 	@Autowired
     private UserService userService;
 	
-	public UserController() {
-		super(ListenerType.USER);
-	}
+	@Autowired
+	private EventBus eventBus;
 	
 	@RequestMapping
     public AsyncResponseEntity<User> getAll() {
@@ -54,16 +54,16 @@ public class UserController extends ControllerBase {
 	@ApiOperation(value = "Update user", response = User.class)
     public AsyncResponseEntity<User> update(@ModelAttribute User user) {
     	return makeAsyncResponse(userService.edit(user, new UserImageDto()).map(i->{
-			publishMessage(i.getId(), i);
+    		eventBus.publishEvent(new UserEvent(i));
 			return i;
 		}), HttpStatus.ACCEPTED);
     }
     
-    @PostMapping("/updateFullProfile")
+	@PostMapping("/updateFullProfile")
     @ApiOperation(value = "Update full profile", response = User.class)
     public AsyncResponseEntity<User> updateFullProfile(@ModelAttribute User user, @ModelAttribute UserImageDto imageDto) {
     	return makeAsyncResponse(userService.edit(user, imageDto).map(i->{
-			publishMessage(i.getId(), i);
+    		eventBus.publishEvent(new UserEvent(i));
 			return i;
 		}), HttpStatus.ACCEPTED);
     }
