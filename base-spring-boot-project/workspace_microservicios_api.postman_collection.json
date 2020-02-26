@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "4c8808ec-d9ad-4545-b335-4af9b151a33f",
+		"_postman_id": "45694f9c-77d7-4a4e-89b8-977d7dd91727",
 		"name": "workspace_microservicios_api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "solicitar token",
+			"name": "get token",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -15,9 +15,8 @@
 						"value": "application/x-www-form-urlencoded"
 					}
 				],
-				"body": {},
 				"url": {
-					"raw": "localhost:8080/api/auth-service/auth?username=testuser5&password=test",
+					"raw": "localhost:8080/api/auth-service/auth?username=testuser1&password=test",
 					"host": [
 						"localhost"
 					],
@@ -30,7 +29,7 @@
 					"query": [
 						{
 							"key": "username",
-							"value": "testuser5"
+							"value": "testuser1"
 						},
 						{
 							"key": "password",
@@ -42,11 +41,10 @@
 			"response": []
 		},
 		{
-			"name": "inicializar",
+			"name": "init",
 			"request": {
 				"method": "POST",
 				"header": [],
-				"body": {},
 				"url": {
 					"raw": "http://localhost:8080/api/auth-service/roles-permissions-setup/init",
 					"protocol": "http",
@@ -65,20 +63,15 @@
 			"response": []
 		},
 		{
-			"name": "products list",
+			"name": "products all",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
-						"key": "Token",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjVAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1Mzg2NjE5OTg0MDgsImV4cCI6MTUzODgzNDc5OH0.in_H7w2GLVByiB5xBzLSZF7Dd4cWhajxISQdgAi5dKeczrURzmZVynoK2d0fFxH5PlVp7w1wNrd4xfPqW3hyKQ"
-					},
-					{
-						"key": "",
-						"value": ""
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjFAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1ODI3MDgzNzczODAsImV4cCI6MTU4Mjg4MTE3N30.IhLS1RKHlXtV9AJDFq-8fhsbwbYcki3IY09tuwRZ9AOY-9_xZ33KLDr1OQl1T-vAfwCGNWft-hFW7C9VRekTyA"
 					}
 				],
-				"body": {},
 				"url": {
 					"raw": "http://localhost:8080/api/product-service/products",
 					"protocol": "http",
@@ -101,13 +94,12 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "Token",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjVAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1Mzg2NjE5OTg0MDgsImV4cCI6MTUzODgzNDc5OH0.in_H7w2GLVByiB5xBzLSZF7Dd4cWhajxISQdgAi5dKeczrURzmZVynoK2d0fFxH5PlVp7w1wNrd4xfPqW3hyKQ"
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjFAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1ODI3MDg0ODExODYsImV4cCI6MTU4Mjg4MTI4MX0.wRA1NyJYNHm2ghDE076MVlUqSZSwOC6s7uX3PZkA8f-vkLCsYAKDd9OnbT04uveKS1oOKMZbAiwgRlOiFHNLJA"
 					}
 				],
-				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/api/product-service/products/5bb61d328b6f2ececff28035",
+					"raw": "http://localhost:8080/api/product-service/products/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -117,7 +109,7 @@
 						"api",
 						"product-service",
 						"products",
-						"5bb61d328b6f2ececff28035"
+						"1"
 					]
 				}
 			},
@@ -129,17 +121,24 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "Token",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjVAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1Mzg2NjE5OTg0MDgsImV4cCI6MTUzODgzNDc5OH0.in_H7w2GLVByiB5xBzLSZF7Dd4cWhajxISQdgAi5dKeczrURzmZVynoK2d0fFxH5PlVp7w1wNrd4xfPqW3hyKQ"
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjFAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1ODI3MDgzNzczODAsImV4cCI6MTU4Mjg4MTE3N30.IhLS1RKHlXtV9AJDFq-8fhsbwbYcki3IY09tuwRZ9AOY-9_xZ33KLDr1OQl1T-vAfwCGNWft-hFW7C9VRekTyA"
 					},
 					{
 						"key": "Content-Type",
-						"value": "text/plain"
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"id\" : \"5\", \"sellerId\" : \"testuser1\", \"name\": \"Huami Amazfit\", \"price\" : 80.59 }"
+					"raw": "{\n    \"_id\": \"3\",\n    \"sellerId\": \"testuser1\",\n    \"name\": \"Huami Stratos\",\n    \"price\": 80.59\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/product-service/products",
