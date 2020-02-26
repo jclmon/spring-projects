@@ -2,14 +2,9 @@
 spring:
   application:
     name: product-service
-
-# Mongo properties
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: product-service-db
-
+      uri: mongodb://localhost:27017/db_products
   # spring boot admin client
   boot:
     admin:      
@@ -26,6 +21,13 @@ management:
 # HTTP Server
 server:
   port: 82
+
+# feign error control
+hystrix:
+  shareSecurityContext: true  
+feign:
+  hystrix:
+    enabled: true
   
 # Discovery Server Access
 eureka:

@@ -17,8 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jcom.auth.api.security.JwtTokenUtil;
@@ -46,7 +46,7 @@ public class AuthController extends ControllerBase {
 
 	private static Logger logger = LoggerFactory.getLogger(AuthController.class);
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<JwtResponse> createAuthenticationToken(
 			@ModelAttribute JwtAuthenticationDto jwtAuthenticationDto, Device device)
 					throws Exception {

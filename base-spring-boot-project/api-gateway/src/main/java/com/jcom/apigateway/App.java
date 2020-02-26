@@ -15,19 +15,23 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 @SpringBootApplication
 @Configuration
 @EnableZuulProxy
-@EnableDiscoveryClient
 @EnableHystrix
 @EnableCircuitBreaker
-@EnableAdminServer
+@EnableDiscoveryClient
+
 /**
- * dashboard url: http://localhost:1111/hystrix/
- * stream url: http://localhost:8080/actuator/hystrix.stream 
+ * dashboard url: http://localhost:8080/hystrix/ stream url:
+ * http://localhost:8080/actuator/hystrix.stream
  */
 @EnableHystrixDashboard
 @EnableTurbine
+
+/**
+ * admin url: http://localhost:8080/admin#/applications
+ */
+@EnableAdminServer
 public class App {
-    public static void main( String[] args )
-    {
-    	SpringApplication.run(App.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(App.class, args);
+	}
 }

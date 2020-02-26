@@ -18,6 +18,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.jcom.product.api.security.SecurityFeignRequestInterceptor;
+
+import feign.RequestInterceptor;
 import pl.jcom.common.async.AsyncConfig;
 import pl.jcom.common.cache.CacheConfig;
 import pl.jcom.common.dao.DaoConfig;
@@ -66,6 +69,11 @@ public class AppConfiguration {
     public CacheManager cacheManager() {
         return CacheConfig.createCacheManager("ProductDaoImpl");
     }
+	
+	@Bean
+	public RequestInterceptor securityFeignRequestInterceptor() {
+	    return new SecurityFeignRequestInterceptor();
+	}
 	
 	@LoadBalanced
 	@Bean

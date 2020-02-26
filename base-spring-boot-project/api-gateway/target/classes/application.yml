@@ -2,22 +2,15 @@
 spring:
   application:
     name: api-gateway  # Identify this application
-    version: 0.0.1-SNAPSHOT
-    
+    version: 0.0.1-SNAPSHOT    
   # Spring boot admin 
   boot:
    admin:
      # other path distinct for eureka
      context-path: /admin
-     
-endpoints:
-  restart:
-    enabled: true
-  shutdown:
-    enabled: true
-  health:
-    sensitive: false
-    
+  mvc:
+    throw-exception-if-no-handler-found: true
+
 # Expose all the Actuator endpoints
 management:
   endpoints:
@@ -26,8 +19,16 @@ management:
         include: "*"
       path-mapping:
         health: /api/health
-        metrics: /api/metrics        
-
+        metrics: /api/metrics  
+             
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+     
 # Server
 server:
   port: 8080   # HTTP (Tomcat) port
@@ -50,20 +51,6 @@ ribbon:
   ServerListRefreshInterval: 2000
   OkToRetryOnAllOperations: true
   retryableStatusCodes: 500,404
-  
-# Api-Gate-Way
-zuul:
-  prefix: /api
-  routes:
-    auth-service:
-      path: /auth-service/**
-      serviceId: AUTH-SERVICE
-      sensitiveHeaders: Cookie,Set-Cookie
-      
-    product-service:
-      path: /product-service/**
-      serviceId: PRODUCT-SERVICE
-      sensitiveHeaders: Cookie,Set-Cookie
 
 #logueo      
 logging:
@@ -79,4 +66,17 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
+  
+# Api-Gate-Way
+zuul:
+  prefix: /api
+  routes:
+    auth-service:
+      path: /auth-service/**
+      serviceId: AUTH-SERVICE
+      sensitiveHeaders: Cookie,Set-Cookie
       
+    product-service:
+      path: /product-service/**
+      serviceId: PRODUCT-SERVICE
+      sensitiveHeaders: Cookie,Set-Cookie

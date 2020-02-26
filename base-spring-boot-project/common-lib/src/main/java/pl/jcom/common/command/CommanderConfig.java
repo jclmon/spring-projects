@@ -19,20 +19,20 @@ public class CommanderConfig {
 		return new Commander(taskExecutor(), taskScheduler());
 	}
 
-	@Bean(name="JCThreadPoolTaskExecutor")
+	@Bean(name="AppThreadPoolTaskExecutor")
 	ThreadPoolTaskExecutor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setBeanName("JCThreadPoolTaskExecutor");
-		executor.setThreadNamePrefix("JCThreadPoolTaskExecutor");
+		executor.setBeanName("AppThreadPoolTaskExecutor");
+		executor.setThreadNamePrefix("AppThreadPoolTaskExecutor");
 		executor.initialize();
 		return executor;
 	}
 
-	@Bean(name="JCThreadPoolTaskScheduler")
+	@Bean(name="AppThreadPoolTaskScheduler")
 	ThreadPoolTaskScheduler taskScheduler() {
 		ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-		scheduler.setBeanName("JCThreadPoolTaskScheduler");
-		scheduler.setThreadNamePrefix("JCThreadPoolTaskScheduler");
+		scheduler.setBeanName("AppThreadPoolTaskScheduler");
+		scheduler.setThreadNamePrefix("AppThreadPoolTaskScheduler");
 		scheduler.initialize();
 		return scheduler;
 	}

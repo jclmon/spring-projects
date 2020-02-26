@@ -2,6 +2,15 @@
 spring:
   application:
     name: auth-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/db_products
+  # spring boot admin client
+  boot:
+    admin:      
+      client:
+        url: http://localhost:8080/admin
+  # rabbit mq
   rabbitmq:
     host: localhost
     port: 5672
@@ -14,19 +23,7 @@ app:
     queue: QueueCommon
     topic: spring-boot-exchange
     expiration: 5000
-     
-# Mongo properties
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: auth-service-db
-  # spring boot admin client
-  boot:
-    admin:      
-      client:
-        url: http://localhost:8080/admin
-        
+
 # Expose all the Actuator endpoints
 management:
   endpoints:

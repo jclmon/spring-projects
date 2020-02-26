@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class EventBusConfig {
 
-	@Value("${app.rabbitmq.queue:XGQueueCommon}")
+	@Value("${app.rabbitmq.queue:QueueCommon}")
 	String queeName;
 
 	@Value("${app.rabbitmq.topic:spring-boot-exchange}")

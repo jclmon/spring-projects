@@ -2,11 +2,11 @@ package com.jcom.product.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jcom.product.api.model.Product;
@@ -17,33 +17,32 @@ import pl.jcom.common.async.response.AsyncResponseEntity;
 import pl.jcom.common.controller.ControllerBase;
 
 @RestController
-@RequestMapping("/products")
 public class ProductController extends ControllerBase{
 
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping
+	@GetMapping("/products")
 	@ApiOperation(value = "Get all products", response = Product.class)
     public AsyncResponseEntity<Product> getAll() {
 		return makeAsyncResponse(productService.getAll());
     }
 	
-	@RequestMapping("/{id}")
+	@GetMapping("/products/{id}")
 	@ApiOperation(value = "Get product by id", response = Product.class)
     public AsyncResponseEntity<Product> getById(@PathVariable("id") String id) {
 		return makeAsyncResponse(productService.getById(id));
     }
 	
-	@PostMapping
+	@PostMapping("/products")
 	@ApiOperation(value = "Add product", response = Product.class)
-    public AsyncResponseEntity<Product> add(@ModelAttribute Product product) {
+    public AsyncResponseEntity<Product> add(@RequestBody Product product) {
     	return makeAsyncResponse(productService.add(product), HttpStatus.CREATED);
     }
     
-    @PutMapping
+    @PutMapping("/products")
     @ApiOperation(value = "Edit product", response = Product.class)
-    public AsyncResponseEntity<Product> edit(@ModelAttribute Product product) {
+    public AsyncResponseEntity<Product> edit(@RequestBody Product product) {
     	return makeAsyncResponse(productService.edit(product), HttpStatus.ACCEPTED);
     }
     

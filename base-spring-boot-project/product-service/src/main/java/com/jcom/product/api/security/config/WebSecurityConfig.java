@@ -46,6 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/products/**").hasRole(Permission.USER_SELLER)
 				.antMatchers(HttpMethod.PUT, "/products/**").hasRole(Permission.USER_SELLER)
                 
+				.antMatchers("/actuator/**", "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
+				
                 //authenticated requests
                 .anyRequest().authenticated();
 

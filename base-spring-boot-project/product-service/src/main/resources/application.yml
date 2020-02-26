@@ -2,14 +2,9 @@
 spring:
   application:
     name: product-service
-
-# Mongo properties
   data:
     mongodb:
-      host: @mongo.host@
-      port: @mongo.port@
-      database: @mongo.database@
-
+      uri: @mongo.uri@
   # spring boot admin client
   boot:
     admin:      
@@ -26,6 +21,13 @@ management:
 # HTTP Server
 server:
   port: @http.port@
+
+# feign error control
+hystrix:
+  shareSecurityContext: true  
+feign:
+  hystrix:
+    enabled: true
   
 # Discovery Server Access
 eureka:

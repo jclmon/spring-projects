@@ -20,21 +20,20 @@ public class CustomCorsFilter extends GenericFilterBean {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
 		
-		if (!res.containsHeader("Access-Control-Allow-Origin"))
+		if (!res.containsHeader("Access-Control-Allow-Origin")) {
 			res.setHeader("Access-Control-Allow-Origin", "*");
-//			res.setHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-		
-		if (!res.containsHeader("Access-Control-Allow-Methods"))
-			res.setHeader("Access-Control-Allow-Methods", "*");
-		if (!res.containsHeader("Access-Control-Max-Age"))
-			res.setHeader("Access-Control-Max-Age", "3600");
-		if (!res.containsHeader("Access-Control-Allow-Headers"))
-			res.setHeader("Access-Control-Allow-Headers", "origin, authorization, content-type, accept");			
-			//res.setHeader("Access-Control-Allow-Headers", "*");
-
-		if (req.getMethod() != "OPTIONS") {
-			chain.doFilter(req, res);
 		}
+		if (!res.containsHeader("Access-Control-Allow-Methods")) {
+			res.setHeader("Access-Control-Allow-Methods", "*");
+		}
+		if (!res.containsHeader("Access-Control-Max-Age")) {
+			res.setHeader("Access-Control-Max-Age", "3600");
+		}
+		if (!res.containsHeader("Access-Control-Allow-Headers")) {
+			res.setHeader("Access-Control-Allow-Headers", "origin, authorization, content-type, accept");
+		}
+
+		chain.doFilter(req, res);
 	}
 
 	@Override

@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.quebic.product.api</groupId>
+	<groupId>com.jcom.product.api</groupId>
 	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -26,11 +26,7 @@
 		<!-- versions -->
 
 		<http.port>82</http.port>
-		<mongo.host>localhost</mongo.host>
-		<mongo.port>27017</mongo.port>
-		<mongo.database>test</mongo.database>
-		<mongo.username></mongo.username>
-		<mongo.password></mongo.password>
+		<mongo.uri>mongodb://localhost:27017/db_products</mongo.uri>
 
 	</properties>
 
@@ -70,6 +66,18 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+
+		<!-- Spring Cloud hystrix to enable circuit breaker -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+
+		<!-- Spring Cloud feign -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 
 		<!-- Spring Security -->
@@ -117,6 +125,12 @@
 			<version>${swagger.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		
 		<!-- RxJava -->
 		<dependency>
 			<groupId>io.reactivex</groupId>
@@ -144,17 +158,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
 
-		<!-- Spring boot admin -->
-		<!-- <dependency> -->
-		<!-- <groupId>de.codecentric</groupId> -->
-		<!-- <artifactId>spring-boot-admin-starter-client</artifactId> -->
-		<!-- <version>1.5.1</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-actuator</artifactId> -->
-		<!-- </dependency> -->
-
 		<!-- logback-sleuth-zipkin -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -181,7 +184,6 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 		</dependency>
-
 
 	</dependencies>
 

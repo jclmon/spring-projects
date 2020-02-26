@@ -71,6 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+                .antMatchers("/actuator/**").permitAll()
+                
                 //allow anonymous auth requests
                 .antMatchers("/auth/**").permitAll()
                 
@@ -80,7 +82,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/sellers/**").permitAll()
                 .antMatchers("/test/images/**").permitAll()
                 .antMatchers("/roles-permissions-setup/init/**").permitAll()
-                
                 .antMatchers(HttpMethod.POST, "/registerOtherSeller/**").hasRole(Permission.USER_SELLER_ADMIN)
                 
                 //authenticated requests

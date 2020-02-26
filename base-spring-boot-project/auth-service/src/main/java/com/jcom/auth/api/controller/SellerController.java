@@ -12,7 +12,6 @@ import com.jcom.auth.api.model.SellerProfile;
 import com.jcom.auth.api.model.User;
 import com.jcom.auth.api.service.UserService;
 
-import io.swagger.annotations.ApiOperation;
 import pl.jcom.common.async.response.AsyncResponseEntity;
 import pl.jcom.common.controller.ControllerBase;
 
@@ -24,7 +23,6 @@ public class SellerController extends ControllerBase {
     private UserService userService;
     
 	@PostMapping
-	@ApiOperation(value = "Save seller", response = User.class)
     public AsyncResponseEntity<User> save(@ModelAttribute User user) {
     	user.getRoles().add(Role.Create_Seller_Admin());
     	
