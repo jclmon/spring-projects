@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: discovery-server
-Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: jclopezm
-Implementation-Vendor-Id: com.quebic.discoveryserver
-Build-Jdk: 1.8.0_171
-Implementation-URL: http://maven.apache.org
-Created-By: Maven Integration for Eclipse
-
