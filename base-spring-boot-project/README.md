@@ -36,9 +36,11 @@ db.User.insert({ "_id" : "2", "status" : "2", "username" : "testuser2", "passwor
 db.Product.insert({ "_id" : "1", "sellerId" : "testuser1", "name": "Huami Pace", "price" : 30 })
 db.Product.insert({ "_id" : "2", "sellerId" : "testuser1", "name": "Huami Amazfit", "price" : 80.59 })
 ``` 
-* select ```db.User.find().pretty()```
-
-* db.User.find( { "username" : "testuser3" } )
+* select 
+```
+db.User.find().pretty()
+db.User.find( { "username" : "testuser3" } )
+```
 
 ## Run project
 
