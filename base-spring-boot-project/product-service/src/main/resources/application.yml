@@ -10,6 +10,13 @@ spring:
     admin:      
       client:
         url: http://localhost:8080/admin
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 
 # Expose all the Actuator endpoints
 management:

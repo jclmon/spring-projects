@@ -10,6 +10,9 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
+/**
+ * Logger filter for requests
+ */
 @Component
 public class LogFilter extends ZuulFilter{
 

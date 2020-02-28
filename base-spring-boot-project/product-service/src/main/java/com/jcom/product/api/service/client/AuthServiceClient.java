@@ -1,4 +1,4 @@
-package com.jcom.product.api.service;
+package com.jcom.product.api.service.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

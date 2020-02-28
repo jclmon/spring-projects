@@ -15,6 +15,7 @@ import com.jcom.auth.api.event.UserEvent;
 import com.jcom.auth.api.model.User;
 import com.jcom.auth.api.service.UserService;
 
+import io.swagger.annotations.ApiOperation;
 import pl.jcom.common.async.response.AsyncResponseEntity;
 import pl.jcom.common.controller.ControllerBase;
 import pl.jcom.common.event.EventBus;
@@ -35,11 +36,13 @@ public class UserController extends ControllerBase {
     }
 	
 	@GetMapping("/users/{id}")
+	@ApiOperation(value = "Get user by id", response = User.class)
     public AsyncResponseEntity<User> getById(@PathVariable("id") String id) {
 		return makeAsyncResponse(userService.getById(id));
     }
 	
 	@PostMapping("/users/changePassword")
+	@ApiOperation(value = "Change password", response = CommonResponse.class)
 	public AsyncResponseEntity<CommonResponse> passwordChange(@ModelAttribute PasswordDto passwordDto) {
 		return makeAsyncResponse(
 				userService.changePassword(passwordDto.getOldPassword(), passwordDto.getNewPassword())
@@ -47,6 +50,7 @@ public class UserController extends ControllerBase {
 	}
 	
 	@PutMapping("/users")
+	@ApiOperation(value = "Update password", response = User.class)
     public AsyncResponseEntity<User> update(@ModelAttribute User user) {
     	return makeAsyncResponse(userService.edit(user, new UserImageDto()).map(i->{
     		eventBus.publishEvent(new UserEvent(i));
@@ -55,6 +59,7 @@ public class UserController extends ControllerBase {
     }
     
 	@PostMapping("/updateFullProfile")
+	@ApiOperation(value = "Update profile", response = User.class)
     public AsyncResponseEntity<User> updateFullProfile(@ModelAttribute User user, @ModelAttribute UserImageDto imageDto) {
     	return makeAsyncResponse(userService.edit(user, imageDto).map(i->{
     		eventBus.publishEvent(new UserEvent(i));

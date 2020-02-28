@@ -14,10 +14,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableFeignClients
 @EnableCircuitBreaker
-public class App 
-{
-    public static void main( String[] args )
-    {
-        SpringApplication.run(App.class, args);
-    }
+public class App {
+	public static void main(String[] args) {
+		SpringApplication.run(App.class, args);
+	}
 }

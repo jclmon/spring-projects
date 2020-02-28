@@ -2,7 +2,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.6.RELEASE</version>
+	</parent>
 	<groupId>com.jcom.auth.api</groupId>
 	<artifactId>auth-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -20,7 +24,9 @@
 		<imgscalr>4.2</imgscalr>
 		<mail.version>1.4</mail.version>
 		<poi.version>3.10.1</poi.version>
-		<spring-cloud.version>Finchley.M8</spring-cloud.version>
+		<swagger.version>2.9.2</swagger.version>
+		<open.api.version>1.2.32</open.api.version>
+		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
 		<common.lib.version>0.0.1-SNAPSHOT</common.lib.version>
 		<!-- versions -->
 
@@ -34,12 +40,6 @@
 		<email.password>test</email.password>
 
 	</properties>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.RELEASE</version>
-	</parent>
 
 	<dependencies>
 
@@ -170,6 +170,23 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 		</dependency>
+
+		<!-- Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webmvc-core</artifactId>
+			<version>${open.api.version}</version>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>io.springfox</groupId> -->
+		<!-- <artifactId>springfox-swagger-ui</artifactId> -->
+		<!-- <version>${swagger.version}</version> -->
+		<!-- </dependency> -->
 
 	</dependencies>
 

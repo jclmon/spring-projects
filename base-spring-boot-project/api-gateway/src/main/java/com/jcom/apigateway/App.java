@@ -11,6 +11,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Configuration;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @Configuration
@@ -30,6 +31,7 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
  * admin url: http://localhost:8080/admin#/applications
  */
 @EnableAdminServer
+@EnableSwagger2
 public class App {
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);

@@ -10,12 +10,13 @@ spring:
     admin:      
       client:
         url: http://localhost:8080/admin
-  # rabbit mq
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
     
 # Event bus
 app:
