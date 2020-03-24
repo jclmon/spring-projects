@@ -31,7 +31,7 @@
 		<!-- versions -->
 
 		<http.port>81</http.port>
-		<mongo.uri>mongodb://localhost:27017/db_products</mongo.uri>
+		<mongo.uri>mongodb://localhost:27017/microservices</mongo.uri>
 		<org.springframework.mobile-version>1.1.3.RELEASE</org.springframework.mobile-version>
 		<mongo.username></mongo.username>
 		<mongo.password></mongo.password>

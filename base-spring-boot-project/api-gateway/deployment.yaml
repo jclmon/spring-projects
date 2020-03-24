@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-gateway
+spec:
+  selector:
+    app: api-gateway
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      # Which port on the node is the service available through?
+      nodePort: 31234
+      # Inside the cluster, what port does the service expose?
+      port: 80
+      # Which port do pods selected by this service expose?
+      targetPort: 8080
+      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  labels:
+    app: api-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: josecarloslopez/api-gateway:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

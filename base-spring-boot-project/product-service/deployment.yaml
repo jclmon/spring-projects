@@ -1,0 +1,71 @@
+# This is the kubernetes file for the product-service
+# In the service section, as we want to keep this service accessible only inside the kubernetes cluster
+# we have the option of using the NodePort, or ClusterIP. Remember that if you use LoadBalancer in a eks cluster
+# a load balancer will be created in AWS, pointing to the node instances of the cluster, which means it will be externally reachable.
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product-service
+  type: NodePort
+  ports:
+      # Which port on the node is the service available through?
+    - nodePort: 30002
+      # Inside the cluster, what port does the service expose?
+      port: 80
+      # Which port do pods selected by this service expose?
+      targetPort: 82
+
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: product-service
+#spec:
+#  selector:
+#    app: product-service
+#  type: ClusterIP
+#  ports:
+#      port: 80
+#      targetPort: 82
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+  labels:
+    app: product-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product-service
+          image: josecarloslopez/product-service:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+           - containerPort: 81
+          env:
+          - name: MONGO_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb
+                key: database-name
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: database-user
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: database-password
