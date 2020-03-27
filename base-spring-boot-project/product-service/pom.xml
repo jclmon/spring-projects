@@ -31,7 +31,7 @@
 		<!-- versions -->
 
 		<http.port>82</http.port>
-		<mongo.uri>mongodb://localhost:27017/db_products</mongo.uri>
+		<mongo.uri>mongodb://localhost:27017/microservices</mongo.uri>
 
 	</properties>
 

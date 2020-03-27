@@ -1,7 +1,14 @@
+# HTTP Server
+server:
+  port: @http.port@
+  
 # Spring properties
 spring:
   application:
     name: product-service
+  #disable zipkin trace
+  zipkin:
+    enabled: false
   data:
     mongodb:
       uri: @mongo.uri@
@@ -25,10 +32,6 @@ management:
       exposure:        
         include: "*"
 
-# HTTP Server
-server:
-  port: @http.port@
-
 # feign error control
 hystrix:
   shareSecurityContext: true  
@@ -51,9 +54,14 @@ jwt:
   expiration: 172800 #seconds
   route:
     authentication:
-      path: auth
+      path: auth-service
       refresh: refresh
 
+#logueo      
+logging:
+  level:
+    ROOT: DEBUG
+    
 ---
 
 spring:

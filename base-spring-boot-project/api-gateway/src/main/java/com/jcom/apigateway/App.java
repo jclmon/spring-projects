@@ -26,11 +26,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @EnableHystrixDashboard
 @EnableTurbine
-
 /**
  * admin url: http://localhost:8080/admin#/applications
  */
 @EnableAdminServer
+/**
+ * swagger url: http://localhost:8080/swagger-ui.html 
+ */
 @EnableSwagger2
 public class App {
 	public static void main(String[] args) {

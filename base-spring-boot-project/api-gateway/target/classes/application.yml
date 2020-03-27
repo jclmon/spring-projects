@@ -52,11 +52,11 @@ ribbon:
   OkToRetryOnAllOperations: true
   retryableStatusCodes: 500,404
 
-#logueo      
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG   
+#trace
+#logging:
+#  level:
+#    ROOT: INFO
+#    org.springframework.web: DEBUG 
       
 # Increase the Hystrix timeout to 60s (globally)
 hystrix:

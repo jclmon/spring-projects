@@ -1,10 +1,17 @@
+# HTTP Server
+server:
+  port: 82
+  
 # Spring properties
 spring:
   application:
     name: product-service
+  #disable zipkin trace
+  zipkin:
+    enabled: false
   data:
     mongodb:
-      uri: mongodb://localhost:27017/db_products
+      uri: mongodb://localhost:27017/microservices
   # spring boot admin client
   boot:
     admin:      
@@ -24,10 +31,6 @@ management:
     web:
       exposure:        
         include: "*"
-
-# HTTP Server
-server:
-  port: 82
 
 # feign error control
 hystrix:
@@ -51,9 +54,14 @@ jwt:
   expiration: 172800 #seconds
   route:
     authentication:
-      path: auth
+      path: auth-service
       refresh: refresh
 
+#logueo      
+logging:
+  level:
+    ROOT: DEBUG
+    
 ---
 
 spring:

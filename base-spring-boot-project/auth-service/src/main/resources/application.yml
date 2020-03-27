@@ -6,6 +6,9 @@ server:
 spring:
   application:
     name: auth-service
+  #disable zipkin trace
+  zipkin:
+    enabled: false
   data:
     mongodb:
       uri: @mongo.uri@
@@ -64,6 +67,11 @@ email:
   userName: @email.userName@
   password: @email.password@
 
+#trace
+#logging:
+#  level:
+#    ROOT: INFO
+#    org.springframework.web: DEBUG
   
 ---
 

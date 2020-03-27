@@ -54,15 +54,17 @@ public class CommonAuthenticationTokenFilter extends OncePerRequestFilter {
 
         	try{
         		
+        		logger.debug("CommonAuthenticationTokenFilter::INFO: Check token validation ");
+        		
         		HttpHeaders headers = new HttpHeaders();
         		headers.add("Authorization", authToken);
         		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         	
-        		HttpEntity<String> entity = new HttpEntity<String>("", headers);
+        		HttpEntity<String> entity = new HttpEntity<>("", headers);
         		
         		ResponseEntity<String> responseEntity = 
         				restTemplate.exchange(
-        						"http://AUTH-SERVICE/auth/current"
+        						"http://auth-service/auth/current"
         						, HttpMethod.POST
         						, entity
         						, String.class);
@@ -70,14 +72,14 @@ public class CommonAuthenticationTokenFilter extends OncePerRequestFilter {
         		String jsonUserDetails = responseEntity.getBody();
                 UserDetails userDetails = prepareUserDetails(jsonUserDetails);
 
-                if (userDetails != null) {
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                
+                logger.debug("CommonAuthenticationTokenFilter::INFO: Token validate ");
                 
         	}catch(Exception e){
-        		logger.error(e.getMessage());
+        		logger.error("CommonAuthenticationTokenFilter::ERROR: " + e.getMessage());
         	}
         	
         }
