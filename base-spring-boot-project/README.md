@@ -5,16 +5,6 @@
 
 ## Introducción al proyecto de ejemplo
 
-1.	Core Services
-2.	Discovery Server
-3.	Discovery Client
-4.	Client Side Load Balancer
-5.	API Gateway
-6.	Security Flow
-7.	Service resilience and Fault tolerance
-8.	State-Less Server
-9.	Common-Lib
-
 En los primeros pasos explicamos la arquitectura a alto nivel para tener una idea de como funciona. Este es
 solo una aplicación de ejemplo.
 
@@ -28,7 +18,6 @@ independiente con un ambito bien definido. Estos son construidos como proyectos 
 - **auth-service** responsable de la gestión del proceso de autenticación utilizando una base de datos Mongo con usuarios
 roles y permisos.
 - **product-service** responsable del almacenamiento de los productos y gestión de inventario.
-
 
 Los servicios con los que funciona la arquitectura Netflix son los siguientes:
 
@@ -85,7 +74,7 @@ Zuul se puede utilizar como un proxy y un filtro de peticiones.
 
 *Gestión de la seguridad* para esto principalmente se utiliza JWT (JSON Web Token) y Spring Security:
 
-![alt test](images/jwt-security.png)
+![alt test](images/jwt-pattern.png)
 
 En las configuraciones de JWT para los servicios se encuentra esta entrada:
 ```
@@ -121,8 +110,6 @@ deberán manteneer el token generado para el envío en cada una de las peticione
 
 El product-service no conoce a los usuarios por lo que tiene que invocar al auth-service el cual desencripta el
 token y lo valida para que product-service pueda continuar con su servicio.
-
-
 
 ### Tolerancia a fallos
 
