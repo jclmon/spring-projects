@@ -3,10 +3,7 @@
 
 ## Implementación Netflix Stack
 
-## Introducción al proyecto de ejemplo
-
-En los primeros pasos explicamos la arquitectura a alto nivel para tener una idea de como funciona. Este es
-solo una aplicación de ejemplo.
+En los primeros pasos explicamos la arquitectura a alto nivel para tener una idea de como funciona. 
 
 ![alt test](images/introduccion.png)
 
@@ -130,37 +127,35 @@ WriteResult({ "nInserted" : 1 })
 ```
 Instalación de common-lib
 ```
-go inside to the common-lib project folder
-then run mvn clean install
+$ cd common-lib
+$ mvn clean install
 ```
-run discovery-server
+Arrancar EUREKA discovery-server
 ```
-go inside to the discovery-server project folder
-then run mvn clean package
-then run java -jar target\discovery-server-0.0.1-SNAPSHOT.jar
+$ cd discovery-server
+$ mvn clean package
+$ java -jar target\discovery-server-0.0.1-SNAPSHOT.jar
 ```
-run api-gateway
+Arrancar API api-gateway
 ```
-go inside to the api-gateway project folder
-then run mvn clean package
-then run java -jar target\api-gateway-0.0.1-SNAPSHOT.jar
+$ cd api-gateway
+$ mvn clean package
+$ java -jar target\api-gateway-0.0.1-SNAPSHOT.jar
 ```
-run auth-service
+Arrancar auth-service
 ```
-go inside to the auth-service project folder
-then run mvn clean package
-then run java -jar target\auth-service-0.0.1-SNAPSHOT.jar
+$ cd auth-service
+$ mvn clean package
+$ java -jar target\auth-service-0.0.1-SNAPSHOT.jar
 ```
-auth-service init
-make request for the auth-service for setup roles and permissions.
-POST /api/auth-service/roles-permissions-setup/init
-
 run product-service
 ```
-go inside to the product-service project folder
-then run mvn clean package
-then run java -jar target\product-service-0.0.1-SNAPSHOT.jar
+$ cd product-service
+$ mvn clean package
+$ java -jar target\product-service-0.0.1-SNAPSHOT.jar
 ```
+Inicialización de roles y permisos en auth-service
+POST http://localhost:8080/api/auth-service/roles-permissions-setup/init
 
 ## Configuración Kubernetess
 
@@ -234,6 +229,9 @@ $ docker build -t josecarloslopez/product-service:1.0 -f Dockerfile .
 $ docker push josecarloslopez/product-service:1.0
 $ kubectl apply -f deployment.yaml
 ```
+
+Inicialización de roles y permisos en auth-service
+POST http://192.168.2.101:31234/api/auth-service/roles-permissions-setup/init
 
 ### Para kubernetes crear usuario en mongodb
 
