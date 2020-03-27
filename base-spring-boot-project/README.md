@@ -1,9 +1,9 @@
 
-#Microservicios
+# Microservicios
 
-##Implementación Netflix Stack
+## Implementación Netflix Stack
 
-##Introducción al proyecto de ejemplo
+## Introducción al proyecto de ejemplo
 
 1.	Core Services
 2.	Discovery Server
@@ -20,7 +20,7 @@ solo una aplicación de ejemplo.
 
 ![alt test](images/introduccion.png)
 
-###Core Services
+### Core Services
 
 Acorde a una arquitectura microservicios dividimos la aplicación en servicios separados. Cada servicio es escalable e 
 independiente con un ambito bien definido. Estos son construidos como proyectos SpringBoot:
@@ -29,11 +29,12 @@ independiente con un ambito bien definido. Estos son construidos como proyectos 
 roles y permisos.
 - **product-service** responsable del almacenamiento de los productos y gestión de inventario.
 
+
 Los servicios con los que funciona la arquitectura Netflix son los siguientes:
 
-- **discover-server** es quien descubre los servicios que requerimos, cuando algun servicio necesita acceso a otro
+- **discovery-server** es quien descubre los servicios que requerimos, cuando algun servicio necesita acceso a otro
 servicio, discover server provee los detalles de los end points *Instance-Id = {Server-Host} + ':' {Service-Id} + ':' + {Server-Port})* 
-Por otro lado discover server no conoce nada mas sobre el servicio. Hay varias implementaciones para crear un discovery server 
+Por otro lado discovery server no conoce nada mas sobre el servicio. Hay varias implementaciones para crear un discovery server 
 (Netflix Eurea, Consul, Zookeeper) la arquitectura netflix utiliza Eureka.
 
 Los clientes del discovery server son los discovery client cada uno esta etiquetado con *@EnableDiscoveryClient* o 
@@ -120,6 +121,8 @@ deberán manteneer el token generado para el envío en cada una de las peticione
 
 El product-service no conoce a los usuarios por lo que tiene que invocar al auth-service el cual desencripta el
 token y lo valida para que product-service pueda continuar con su servicio.
+
+
 
 ### Tolerancia a fallos
 
@@ -268,13 +271,13 @@ Role
 User
 ```
 
-##Spring Boot Admin
+## Spring Boot Admin
 
 La consola de Spring Boot Admin está configurada en el api-gateway:
 
 ![alt test](images/spring-boot-admin.png)
 
-##Hystrix
+## Hystrix
 
 Hystrix Dashboard está configurado en el api-gateway:
 
@@ -284,14 +287,14 @@ Si se incluye en stream: http://192.168.2.101:31234/actuator/hystrix.stream
 
 ![alt test](images/hystrix-2.png)
 
-##Swagger
+## Swagger
 
 Swagger UI para mostrar las definiciones de los servicios está configurado en el api-gateway:
 
 ![alt test](images/swagger.png)
 
 
-##Pruebas con Postman
+## Pruebas con Postman
 
 ### Solicitar token
 
@@ -305,5 +308,3 @@ Swagger UI para mostrar las definiciones de los servicios está configurado en e
 ### Ver productos
 
 ![alt test](images/show-products.png)
-
-
