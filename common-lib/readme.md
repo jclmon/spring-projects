@@ -1,0 +1,1 @@
+# Librería común para proyectos con BBDD SQL
