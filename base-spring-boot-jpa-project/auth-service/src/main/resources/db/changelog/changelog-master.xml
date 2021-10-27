@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <include file="/db/changelog/changes/001_added_entity_Role.xml"/>
+    <include file="/db/changelog/changes/002_added_entity_Permission.xml"/>
+    <include file="/db/changelog/changes/003_added_entity_User.xml"/>
+	<include file="/db/changelog/changes/004_added_entity_Role_Permission.xml"/>
+	<include file="/db/changelog/changes/005_added_entity_constraints_Role_Permission.xml"/>    
+	<include file="/db/changelog/changes/006_added_entity_User_Permission.xml"/>
+	<include file="/db/changelog/changes/007_added_entity_constraints_User_Permission.xml"/>
+	<include file="/db/changelog/changes/008_added_entity_User_Role.xml"/>	
+	<include file="/db/changelog/changes/009_added_entity_constraints_User_Role.xml"/>
+	<include file="/db/changelog/changes/010_insert_entity_User.xml"/>
+</databaseChangeLog>

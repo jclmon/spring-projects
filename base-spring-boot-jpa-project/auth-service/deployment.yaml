@@ -1,0 +1,71 @@
+# This is the kubernetes file for the auth-service
+# In the service section, as we want to keep this service accessible only inside the kubernetes cluster
+# we have the option of using the NodePort, or ClusterIP. Remember that if you use LoadBalancer in a eks cluster
+# a load balancer will be created in AWS, pointing to the node instances of the cluster, which means it will be externally reachable.
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: auth-service
+spec:
+  selector:
+    app: auth-service
+  type: NodePort
+  ports:
+      # Which port on the node is the service available through?
+    - nodePort: 30001
+      # Inside the cluster, what port does the service expose?
+      port: 80
+      # Which port do pods selected by this service expose?
+      targetPort: 81
+
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: auth-service
+#spec:
+#  selector:
+#    app: auth-service
+#  type: ClusterIP
+#  ports:
+#      port: 80
+#      targetPort: 81
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  labels:
+    app: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+        - name: auth-service
+          image: josecarloslopez/auth-service:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+           - containerPort: 81
+          env:
+          - name: MONGO_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb
+                key: database-name
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: database-user
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: database-password

@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "dad3a50b-0a48-4188-9988-1637d775e69f",
+		"name": "base-spring-boot-jpa-project_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/auth-service/auth?username=admin&password=Admin01!",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth-service",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						},
+						{
+							"key": "password",
+							"value": "Admin01!"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "init",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/auth-service/roles-permissions-setup/init",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth-service",
+						"roles-permissions-setup",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlLmNhcmxvcy5sb3BlekBnbWFpbC5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE2MjE1MDM2NjAxNTAsImV4cCI6MTYyMTY3NjQ2MH0.jMfi1EUJQwc8jOCxtPJ5YX76ZX2VdAMEKGg-M6zuxeaMQBVBXdEVoo35zYpr0JqMU5leLKc-qYcvSesdXMKZ8w"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products?page=0&size=10&sort",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjFAdGVzdGRvbWFpbi5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE1ODI3MDgzNzczODAsImV4cCI6MTU4Mjg4MTE3N30.IhLS1RKHlXtV9AJDFq-8fhsbwbYcki3IY09tuwRZ9AOY-9_xZ33KLDr1OQl1T-vAfwCGNWft-hFW7C9VRekTyA"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products/search/filter?page=0&size=10&sort=id,DESC&column=name&query=Huami Stratos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products",
+						"search",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "id,DESC"
+						},
+						{
+							"key": "column",
+							"value": "name"
+						},
+						{
+							"key": "query",
+							"value": "Huami Stratos"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products search filter",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlLmNhcmxvcy5sb3BlekBnbWFpbC5jb20iLCJhdWRpZW5jZSI6IndlYiIsImNyZWF0ZWQiOjE2MjE1MDM2NjAxNTAsImV4cCI6MTYyMTY3NjQ2MH0.jMfi1EUJQwc8jOCxtPJ5YX76ZX2VdAMEKGg-M6zuxeaMQBVBXdEVoo35zYpr0JqMU5leLKc-qYcvSesdXMKZ8w"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products?page=0&size=10&sort=id,DESC&query=manre&column=direccion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "id,DESC"
+						},
+						{
+							"key": "query",
+							"value": "manre"
+						},
+						{
+							"key": "column",
+							"value": "direccion"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products byId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqY2xtb25Ab3V0bG9vay5lcyIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTYzNTMyNzA2NTM4MSwiZXhwIjoxNjM1NDk5ODY1fQ.KbX6jWhV8DSrNh9bfiK97JtaSbQjQh5rV_cHo4ogQhanBSoR6bdOx7FPfbl87pr3-1AlAJkuQONmkXxhGE6IYQ"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqY2xtb25Ab3V0bG9vay5lcyIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTYzNTMyNzA2NTM4MSwiZXhwIjoxNjM1NDk5ODY1fQ.KbX6jWhV8DSrNh9bfiK97JtaSbQjQh5rV_cHo4ogQhanBSoR6bdOx7FPfbl87pr3-1AlAJkuQONmkXxhGE6IYQ"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product",
+							"value": "{\n    \"sellerId\": \"testuser1\",\n    \"name\": \"Huami Stratos\",\n    \"price\": 80.59\n}",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/Admin/Pictures/Saved Pictures/external-content.duckduckgo.com3.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/product-service/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-service",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"jc@gmail.com\",\r\n    \"login\": \"jc\",\r\n    \"firstname\": \"jc\",\r\n    \"password\": \"jc\",\r\n    \"language\": \"es\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth-service/users/account",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth-service",
+						"users",
+						"account"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet author="admin" id="1">
+    
+        <insert tableName="userinfo">
+            <column name="id" valueNumeric="1"/>
+            <column name="code" value="admin"/>
+            <column name="namecode" value="admin"/>
+            <column name="langcode" value="es"/>
+			<!-- Admin01! ver https://www.devglan.com/online-tools/bcrypt-hash-generator -->
+            <column name="password" value="$2a$04$U0/oG2m1adUg5pN./M68Sex8.ZUKdsfkckl7dSWOaTItZQUycFv/y"/>
+            <column name="email" value="jclmon@outlook.es"/>
+            <column name="first_name" value="jc"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="permission">
+            <column name="id" value="USER_SELLER"/>
+            <column name="code" value="USER_SELLER"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="permission">
+            <column name="id" value="USER_BUYER"/>
+            <column name="code" value="USER_BUYER"/>
+            <column name="status" value="1"/>
+        </insert>                
+        <insert tableName="permission">
+            <column name="id" value="USER_ADMIN"/>
+            <column name="code" value="USER_ADMIN"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="permission">
+            <column name="id" value="USER"/>
+            <column name="code" value="USER"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="permission">
+            <column name="id" value="USER_SELLER_ADMIN"/>
+            <column name="code" value="USER_SELLER_ADMIN"/>
+            <column name="status" value="1"/>
+        </insert>                                                                                       
+        <insert tableName="role">
+            <column name="id" value="role.seller.admin"/>
+            <column name="code" value="role.seller.admin"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" value="role.admin"/>
+            <column name="code" value="role.admin"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" value="role.seller"/>
+            <column name="code" value="role.seller"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" value="role.buyer"/>
+            <column name="code" value="role.buyer"/>
+            <column name="status" value="1"/>
+        </insert>
+        <insert tableName="user_permission">
+            <column name="id_user" valueNumeric="1"/>
+            <column name="id_permission" value="USER"/>
+        </insert>               
+        <insert tableName="user_permission">
+            <column name="id_user" valueNumeric="1"/>
+            <column name="id_permission" value="USER_ADMIN"/>
+        </insert>
+        <insert tableName="user_permission">
+            <column name="id_user" valueNumeric="1"/>
+            <column name="id_permission" value="USER_SELLER"/>
+        </insert>
+        <insert tableName="user_permission">
+            <column name="id_user" valueNumeric="1"/>
+            <column name="id_permission" value="USER_BUYER"/>
+        </insert>        
+        <insert tableName="user_role">
+            <column name="id_user" valueNumeric="1"/>
+            <column name="id_role" value="role.admin"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.admin"/>
+            <column name="id_permission" value="USER"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.admin"/>
+            <column name="id_permission" value="USER_ADMIN"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.admin"/>
+            <column name="id_permission" value="USER_SELLER"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.admin"/>
+            <column name="id_permission" value="USER_BUYER"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.buyer"/>
+            <column name="id_permission" value="USER"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.buyer"/>
+            <column name="id_permission" value="USER_BUYER"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.seller"/>
+            <column name="id_permission" value="USER"/>
+        </insert>
+        <insert tableName="role_permission">
+            <column name="id_role" value="role.seller"/>
+            <column name="id_permission" value="USER_SELLER"/>
+        </insert>                                        
+    </changeSet>
+    
+</databaseChangeLog>

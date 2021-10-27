@@ -1,0 +1,117 @@
+# Server
+server:
+  port: '@http.port@'   # HTTP (Tomcat) port
+  
+# Spring properties
+spring:
+  application:
+    name: api-gateway  # Identify this application
+    version: '@version@'    
+  # Spring boot admin 
+  boot:
+   admin:
+     # other path distinct for eureka
+     context-path: /admin
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+# Expose all the Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:        
+        include: "*"
+#      path-mapping:
+#        health: /api/health
+#        metrics: /api/metrics  
+             
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+    
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+
+ribbon:
+  ConnectTimeout: 120000
+  ReadTimeout: 120000
+  MaxTotalHttpConnections: 100
+  MaxConnectionsPerHost: 100
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 2
+  ServerListRefreshInterval: 2000
+  OkToRetryOnAllOperations: true
+  retryableStatusCodes: 500,404
+
+#trace
+#logging:
+#  level:
+#    ROOT: INFO
+#    org.springframework.web: DEBUG 
+      
+# Increase the Hystrix timeout to 60s (globally)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+  shareSecurityContext: true
+  
+# Api-Gate-Way
+zuul:
+  prefix: /api
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  routes:
+    auth-service:
+      path: /auth-service/**
+      serviceId: AUTH-SERVICE
+      sensitiveHeaders: Cookie,Set-Cookie
+      
+    product-service:
+      path: /product-service/**
+      serviceId: PRODUCT-SERVICE
+      sensitiveHeaders: Cookie,Set-Cookie
+      
+---
+
+spring:
+  profiles: prod
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+  #Service will be mapped under the /api URI
+  prefix: /api
+#  Uncomment to disable auto-registering all services read from Eureka
+#  ignoredServices: '*'
+
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    hostname: api-gateway
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:1111/eureka,http://eureka-1.eureka.default.svc.cluster.local:1111/eureka,http://eureka-2.eureka.default.svc.cluster.local:1111/eureka    

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="admin" id="1">
+
+        <createTable tableName="userinfo">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" type="VARCHAR(100)" defaultValue="empty">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INT" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="namecode" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="langcode" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>            
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(50)"/>
+            
+            <column name="profile_image_container" type="BLOB"/>
+            <column name="cover_image_container" type="BLOB"/>
+            <column name="last_logged_on" type="DATE"/>
+            <column name="registered_on" type="DATE"/>
+            <column name="attempts" type="INT"/>
+			<column name="last_password_reset_date" type="DATE"/>
+
+        </createTable>
+        
+        <rollback>
+            <dropTable tableName="userinfo"/>
+        </rollback>
+        
+    </changeSet>
+</databaseChangeLog>

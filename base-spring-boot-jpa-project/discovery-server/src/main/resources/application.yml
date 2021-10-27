@@ -1,0 +1,51 @@
+## Configure this Discovery Server
+
+# HTTP Server
+server:
+  port: @http.port@
+
+spring:
+  profiles:
+    active: "dev"
+  application:
+    name: eureka
+
+---
+
+spring:
+  profiles: dev
+eureka:
+  numberRegistrySyncRetries: 1
+  instance:
+    preferIpAddress: true
+  client:
+    # Not a client, don't register with yourself
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+  server:
+    enableSelfPreservation: false
+# Expose all the Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:        
+        include: "*"
+        
+---
+
+spring:
+  profiles: prod
+eureka:
+  instance:
+    hostname: "${HOSTNAME}.eureka"
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS}
+management:
+  endpoints:
+    web:
+      exposure:        
+        include: "*"

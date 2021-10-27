@@ -1,0 +1,139 @@
+# HTTP Server
+server:
+  port: '@http.port@'
+  
+# Spring properties
+spring:
+  application:
+    name: auth-service
+  #disable zipkin trace
+  zipkin:
+    enabled: false
+  # spring boot admin client
+  boot:
+    admin:      
+      client:
+        url: http://localhost:8080/admin
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+    
+  # database
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false          
+    show-sql: true       
+        
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user
+    username: postgres
+    password: root
+    # default connection pool
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+      
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/changelog-master.xml
+
+
+logging:
+  level:
+    liquibase: INFO
+
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+    
+app:
+  # Event bus  
+  rabbitmq:
+    queue: QueueCommon
+    topic: spring-boot-exchange
+    expiration: 5000
+
+# Expose all the Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:        
+        include: "*"        
+  
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+
+# Auth JWT
+jwt:
+  header: Authorization
+  secret: secret_secret
+  expiration: 172800 #seconds
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+
+# Image Upload Location
+image:
+  upload:
+    location: '@image.upload.location@'
+    
+# Email
+email:
+  userName: '@email.userName@'
+  password: '@email.password@'
+
+#trace
+#logging:
+#  level:
+#    ROOT: INFO
+#    org.springframework.web: DEBUG
+  
+---
+
+spring:
+  profiles: prod
+  data:
+    mongodb:
+      # mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb.default.svc.cluster.local/${MONGO_DATABASE}
+      uri: mongodb://test:example@mongodb.default.svc.cluster.local/${MONGO_DATABASE}
+  # spring boot admin client
+  boot:
+    admin:
+      client:
+         url: http://api-gateway.default.svc.cluster.local:${API_GATEWAY_SERVICE_PORT}/admin         
+         instance:
+            service-url: http://${AUTH_SERVICE_SERVICE_HOST}
+
+# Expose all the Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:        
+        include: "*"  
+  endpoint:
+    health:
+      show-details: ALWAYS
+                       
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    hostname: ${spring.application.name}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:1111/eureka,http://eureka-1.eureka.default.svc.cluster.local:1111/eureka,http://eureka-2.eureka.default.svc.cluster.local:1111/eureka
