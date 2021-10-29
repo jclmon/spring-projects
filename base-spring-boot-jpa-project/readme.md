@@ -140,6 +140,7 @@ $ kubectl apply -f deployment.yaml
 $ cd ..
 $ cd ..
 $ cd product-service/postgresql
+$ kubectl apply -f deployment.yaml
 $ cd ..
 $ cd ..
 $ cd discovery-server
@@ -161,5 +162,37 @@ $ cd product-service
 $ docker build -t josecarloslopez/product-service:1.0 -f Dockerfile .
 $ docker push josecarloslopez/product-service:1.0
 $ kubectl apply -f deployment.yaml
+```
+
+Es necesario exponer hacia afuera el servicio de api-gateway para poder acceder a él, para ello en minikube:
+
+```
+PS C:\Users\Admin> minikube service api-gateway
+|-----------|-------------|-------------|----------------------------|
+| NAMESPACE |    NAME     | TARGET PORT |            URL             |
+|-----------|-------------|-------------|----------------------------|
+| default   | api-gateway |          80 | http://192.168.2.153:31234 |
+|-----------|-------------|-------------|----------------------------|
+```
+
+En este caso se despliegan dos bases de datos totalmente independientes una para usuarios y otra para productos, para ver los ficheros de las dos bases de datos en minikube:
+
+```
+PS C:\Users\Admin> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ ls /
+bin   dev  home  lib    libexec  media  opt   root  sbin  sys  usr
+data  etc  init  lib64  linuxrc  mnt    proc  run   srv   tmp  var
+$ ls /data
+pgdata
+$ cd /data/pgdata
+$ ls
+product  user
 ```
 
