@@ -95,10 +95,31 @@ jwt:
 
 spring:
   profiles: prod
-  data:
-    mongodb:
-      # mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb.default.svc.cluster.local/${MONGO_DATABASE}
-      uri: mongodb://test:example@mongodb.default.svc.cluster.local/${MONGO_DATABASE}
+
+   # database
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false          
+    show-sql: true       
+        
+  datasource:
+    url: jdbc:postgresql://product-postgres.default.svc.cluster.local:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    # default connection pool
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+      
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/changelog-master.xml      
+      
   # spring boot admin client
   boot:
     admin:

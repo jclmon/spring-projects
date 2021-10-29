@@ -1,7 +1,0 @@
-FROM mongo:4.0
-ENV MONGO_INITDB_ROOT_USERNAME root
-ENV MONGO_INITDB_ROOT_PASSWORD example
-ENV MONGO_INITDB_DATABASE microservices
-ENV MONGO_NON_ROOT_USERNAME test 
-ENV MONGO_NON_ROOT_PASSWORD example
-COPY custom-user.sh /docker-entrypoint-initdb.d/

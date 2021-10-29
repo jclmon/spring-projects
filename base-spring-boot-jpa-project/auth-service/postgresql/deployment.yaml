@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-user-configmap
+  labels:
+    app: user-postgres
+data:
+  POSTGRES_DB: user
+  POSTGRES_USER: docker
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-user-secrets
+data:
+  POSTGRES_PASSWORD: root
+stringData:
+  POSTGRES_USER: docker
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-user-pv-volume
+  labels:
+    type: local
+    app: user-postgres
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data/pgdata/user/
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-user-pv-claim
+  labels:
+    app: user-postgres
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-postgres
+spec:
+  selector:
+    matchLabels:
+      app: user-postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-postgres
+    spec:
+      containers:
+        - name: user-postgres
+          image: postgres:10.4
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+          - secretRef:
+              name: postgres-user-secrets
+          - configMapRef:
+              name: postgres-user-configmap  
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgres-user-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-postgres
+  labels:
+    app: user-postgres
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+  selector:
+    app: user-postgres

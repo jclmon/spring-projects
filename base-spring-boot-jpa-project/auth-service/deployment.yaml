@@ -50,22 +50,22 @@ spec:
       containers:
         - name: auth-service
           image: josecarloslopez/auth-service:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
            - containerPort: 81
           env:
-          - name: MONGO_DATABASE
+          - name: POSTGRES_DB
             valueFrom:
               configMapKeyRef:
-                name: mongodb
-                key: database-name
-          - name: MONGO_USERNAME
+                name: postgres-user-configmap
+                key: POSTGRES_DB
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-user-configmap
+                key: POSTGRES_USER
+          - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mongodb
-                key: database-user
-          - name: MONGO_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mongodb
-                key: database-password
+                name: postgres-user-secrets
+                key: POSTGRES_PASSWORD
