@@ -118,7 +118,7 @@ Netflix Hystrix es la implementación par la tolerancia a fallos y utiliza el pa
 
 Existen dos implementaciones distintas dependiendo del gestor de base de datos utilizado, para el primer proyecto base-spring-boot-project el gestor utilizado es MongoDB en el segundo proyecto base-spring-boot-jpa-project se utiliza JPA y el gestor de bases de datos utilizados en el proyecto base es Postress.
 
-![](C:\workspaces_otros\Github\spring-projects\images\common-lib.png)
+![](images/common-lib.png)
 
 
 

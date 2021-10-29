@@ -1,4 +1,4 @@
-### Ejecución del proyecto
+# Ejecución del proyecto
 
 Arrancar mongodb y crear la base de datos, insertar el primer usuario para pruebas:
 
@@ -13,14 +13,14 @@ switched to db microservices
 WriteResult({ "nInserted" : 1 })
 ```
 
-Instalación de common-lib
+### Instalación de common-lib
 
 ```
 $ cd common-lib
 $ mvn clean install
 ```
 
-Arrancar EUREKA discovery-server
+### Arrancar EUREKA discovery-server
 
 ```
 $ cd discovery-server
@@ -28,7 +28,7 @@ $ mvn clean package
 $ java -jar target\discovery-server-0.0.1-SNAPSHOT.jar
 ```
 
-Arrancar API api-gateway
+### Arrancar API api-gateway
 
 ```
 $ cd api-gateway
@@ -36,7 +36,7 @@ $ mvn clean package
 $ java -jar target\api-gateway-0.0.1-SNAPSHOT.jar
 ```
 
-Arrancar auth-service
+### Arrancar auth-service
 
 ```
 $ cd auth-service
@@ -44,7 +44,7 @@ $ mvn clean package
 $ java -jar target\auth-service-0.0.1-SNAPSHOT.jar
 ```
 
-run product-service
+### Arrancar product-service
 
 ```
 $ cd product-service
@@ -55,7 +55,7 @@ $ java -jar target\product-service-0.0.1-SNAPSHOT.jar
 Inicialización de roles y permisos en auth-service
 POST http://localhost:8080/api/auth-service/roles-permissions-setup/init
 
-### Para entorno producción construir las imágenes, subirlas si se quieren tener en repositorio y desplegar con Kubernetess
+## Para entorno producción construir las imágenes, subirlas si se quieren tener en repositorio y desplegar con Kubernetess
 
 ```
 $ cd discovery-server
