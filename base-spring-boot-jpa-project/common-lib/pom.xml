@@ -22,7 +22,7 @@
 		<dropbox.version>2.1.1</dropbox.version>
 		<orika.version>1.5.2</orika.version>
 		<lombok.version>1.18.0</lombok.version>
-        <hibernate.version>5.2.17.Final</hibernate.version>		
+        <hibernate.version>5.3.20.Final</hibernate.version>		
 	</properties>
 
 	<dependencies>
